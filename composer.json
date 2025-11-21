@@ -1,0 +1,17 @@
+{
+    "name": "yuta/oshi-cal",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yuta4431",
+            "email": "orange_1272@yahoo.co.jp"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}
