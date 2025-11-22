@@ -6,6 +6,29 @@ use App\Core\Bootstrap;
 
 class EventController
 {
+    public function new()
+    {
+        $twig = Bootstrap::getTwig();
+        echo $twig->render('new.html.twig');
+
+    }
+
+    public function create()
+    {
+        $title = $_POST['title'] ?? '';
+        $date = $_POST['date'] ?? '';
+        $memo = $_POST['memo'] ?? '';
+
+        $twig = Bootstrap::getTwig();
+        echo $twig->render('show.html.twig', [
+            'event' => [
+                'title' => $title,
+                'date' => $date,
+                'memo' => $memo
+            ]
+        ]);
+    }
+    
     public function show()
     {
         $twig = Bootstrap::getTwig();
@@ -15,7 +38,7 @@ class EventController
 
         // IDがなければ404扱い
         if ($id === null) {
-            echo $twig->render('event_not_found.twig');
+            echo $twig->render('event_not_found.html.twig');
             return;
         }
 
@@ -40,12 +63,12 @@ class EventController
 
         // 見つからなければ別画面へ
         if (!$event) {
-            echo $twig->render('event_not_found.twig');
+            echo $twig->render('event_not_found.html.twig');
             return;
         }
 
         // 通常表示
-        echo $twig->render('event_show.twig', [
+        echo $twig->render('show.html.twig', [
             'event' => $event
         ]);
     }

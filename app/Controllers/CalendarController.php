@@ -10,8 +10,6 @@ class CalendarController
     {
         $twig = Bootstrap::getTwig();
 
-        echo $twig->render('calendar_index.twig', [
-            'title' => 'OshiCal カレンダー'
-        ]);
+        echo $twig->render('index.html.twig', ['title' => 'OshiCal カレンダー']);
     }
 }
