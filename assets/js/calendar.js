@@ -9,12 +9,16 @@ document.addEventListener('DOMContentLoaded', function () {
         // ★ ダミーイベントを追加
         events: [
             {
+                id: 1,
                 title: 'ライブ（東京）',
-                start: '2025-11-05'   // 日付だけなら終日イベント
+                start: '2025-11-05',   // 日付だけなら終日イベント
+                url: '/OshiCal/public/index.php?route=event/show&id=1'
             },
             {
+                id: 2,
                 title: '配信イベント',
                 start: '2025-11-12T20:00:00', // 時間あり
+                url: '/OshiCal/public/index.php?route=event/show&id=2'
             },
             {
                 title: '握手会（大阪）',
