@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>イベント詳細</title>
+</head>
+<body>
+    {% if event %}
+        <h1>{{ event.title }}</h1>
+        <p><strong>日付：</strong> {{ event.date }}</p>
+        <p><strong>メモ：</strong><br>{{ event.memo|nl2br }}</p>
+    {% else %}
+        <p>イベントが見つかりません。</p>
+    {% endif %}
+
+    <div style="margin-top: 20px;">
+        <a href="/OshiCal/public/index.php">カレンダーに戻る</a>
+    </div>
+
+</body>
+</html>
