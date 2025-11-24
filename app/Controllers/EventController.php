@@ -110,4 +110,12 @@ class EventController
             ]
         ]);
     }
+
+    public function delete()
+    {
+        $id = $_GET['id'] ?? null;
+
+        header('Location: /OshiCal/public/index.php');
+        exit;
+    }
 }

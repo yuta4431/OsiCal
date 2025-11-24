@@ -14,6 +14,12 @@
     {% endif %}
 
     <p><a href="/OshiCal/public/index.php?route=event/edit&id={{ event.id }}">編集する</a></p>
+    <a href="/OshiCal/public/index.php?route=event/delete&id={{ event.id }}"
+       onclick="return confirm('本当に削除しますか？');">
+        削除する
+    </a>
+
+
 
     <div style="margin-top: 20px;">
         <a href="/OshiCal/public/index.php">カレンダーに戻る</a>
