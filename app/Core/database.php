@@ -13,7 +13,7 @@ class Database
     {
         if (!self::$pdo) {
 
-            $config = require __DIR__ . '/../../config/config.php';
+            $config = require __DIR__ . '/../config/config.php';
 
             $dsn = "mysql:host={$config['db_host']};dbname={$config['db_name']};charset=utf8mb4";
 
