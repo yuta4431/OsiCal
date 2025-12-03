@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>イベント編集</title>
+    <link rel="stylesheet" href="/OshiCal/public/assets/css/style.css">
+</head>
+
+<body>
+    <h1>イベント編集</h1>
+
+    <form action="/OshiCal/public/index.php?route=event/update" method="post">
+        <div>
+            <label for="oshi_select">推し：<label><br>
+            <select name="oshi_id" id="oshi_select" required>
+                <option value="">選択してください</option>
+                {% for oshi in oshis %}
+                    <option value="{{ oshi.id }}">{{ oshi.name }}</option>
+                {% endfor %}
+                <option value="new">+ 新規追加</option>
+            </select>
+        </div>
+        <div id="new_oshi_wrapper" style="display:none; margin-top: 8px;">
+            <input type="text" name="new_oshi_name" class="form-input" placeholder="追加したい推し名を入力">
+            <button type="button" onclick="submitOshi()">追加</button>
+            <button type="button" onclick="cancelNewItem('oshi_select', 'new_oshi_wrapper')">戻る</button>
+        </div>
+        
+        <div>
+            <label for="title_input">タイトル：</label><br>
+            <input type="text" id="title_input "name="title" class="form-input" required>
+        </div>
+
+        <div>
+            <label for="category_select">カテゴリー：</label><br>
+            <select name="category_id" id="category_select" required>
+                <option value="">選択してください</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+                <option value="new">+ 新規追加</option>
+            </select>
+        </div>
+        <div id="new_category_wrapper" style="display:none; margin-top: 8px;">
+            <input type="text" id="new_category_name" name="new_category_name" class="form-input" placeholder="追加したいカテゴリーを入力">
+        </div>
+
+        <div>
+            <label for="date_input">日付：</label><br>
+            <input type="date" id="date_input" name="date" class="form-input" required>
+        </div>
+
+        <div>
+            <label for="memo_area">メモ：</label><br>
+            <textarea id="memo_area" name="memo"></textarea>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button type="submit" id="submit">登録する</button>
+        </div>
+
+        <div id="category_buttons" style="display:none; margin-top:10px;">
+            <button type="button" onclick="submitCategory()">追加</button>
+            <button type="button" onclick="cancelNewItem('category_select', 'new_category_wrapper')">戻る</button>
+        </div>
+
+    </form>
+
+    <script src="/OshiCal/public/assets/js/event.js"></script>
+
+</body>
+</html>

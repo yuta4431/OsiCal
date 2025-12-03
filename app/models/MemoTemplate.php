@@ -34,19 +34,31 @@ class MemoTemplate
         $sql = "INSERT INTO memo_templates (category_id, template) VALUES (:category_id, :template)";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute(['category_id' => $category_id, 'template' => $template]);
+        return (int) $this->pdo->lastInsertId();
     }
 
-    public function update($id, $category_id, $template)
+    public function update($id, $template)
     {
-        $sql = "UPDATE memo_templates SET category_id = :category_id, template = :template WHERE id = :id";
+        $sql = "UPDATE memo_templates SET template = :template WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute(['id' => $id, 'category_id' => $category_id, 'template' => $template]);
+        return $stmt->execute(['id' => $id, 'template' => $template]);
     }
 
-    public function delete($id)
+    public function updateOrCreate($category_id, $template)
     {
-        $sql = "DELETE FROM memo_templates WHERE id = :id";
+        $current = $this->findByCategory($category_id);
+
+        if($current) {
+            return $this->update($current['id'], $template);
+        } else {
+            return $this->create($category_id, $template);
+        }
+    }
+
+    public function deleteByCategory($category_id)
+    {
+        $sql = "DELETE FROM memo_templates WHERE category_id = :category_id";
         $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute(['id' => $id]);
+        return $stmt->execute(['category_id' => $category_id]);
     }
 }

@@ -37,13 +37,15 @@ class Event
         
         $stmt = $this->pdo->prepare($sql);
 
-        return $stmt->execute([
+        $stmt->execute([
             'title' => $title,
             'date' => $date,
             'memo' => $memo,
             'oshi_id' => $oshi_id,
             'category_id' => $category_id
         ]);
+
+        return (int) $this->pdo->lastInsertId();
     }
 
     public function update($id, $title, $date, $memo, $oshi_id, $category_id)
@@ -58,7 +60,7 @@ class Event
 
         $stmt = $this->pdo->prepare($sql);
 
-        return $stmt->execute([
+        $stmt->execute([
             'id' => $id,
             'title' => $title,
             'date' => $date,
@@ -66,6 +68,8 @@ class Event
             'oshi_id' => $oshi_id,
             'category_id' => $category_id
         ]);
+
+        return $id;
     }
 
     public function delete($id)
