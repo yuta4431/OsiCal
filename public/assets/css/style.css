@@ -1,0 +1,25 @@
+.form-input,
+textarea,
+select {
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+textarea {
+    width: 500px;
+    height: 200px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    font-size: 12px;
+    color: rgba(0,0,0,0.4);
+}

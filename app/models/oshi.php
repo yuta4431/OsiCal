@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Core\Database;
 use PDO;
 
-class oshi
+class Oshi
 {
     private $pdo;
 
@@ -33,7 +33,8 @@ class oshi
     {
         $sql = "INSERT INTO oshis (name) VALUES (:name)";
         $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute(['name' => $name]);
+        $stmt->execute(['name' => $name]);
+        return (int) $this->pdo->lastInsertId();
     }
 
     public function update($id, $name)

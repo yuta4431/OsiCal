@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Core\Database;
 use PDO;
 
-class category
+class Category
 {
     private $pdo;
 
@@ -33,7 +33,8 @@ class category
     {
         $sql = "INSERT INTO categories (name) VALUES (:name)";
         $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute(['name' => $name]); 
+        $stmt->execute(['name' => $name]); 
+        return (int) $this->pdo->lastInsertId();
     }
 
     public function update($id, $name)
