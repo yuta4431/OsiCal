@@ -78,4 +78,12 @@ class Event
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute(['id' => $id]);
     }
+
+    public function findByOshi($oshi_id)
+    {
+        $sql = "SELECT * FROM events WHERE oshi_id = :oshi_id ORDER BY date ASC";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['oshi_id' => $oshi_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

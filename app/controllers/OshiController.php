@@ -4,14 +4,17 @@ namespace App\Controllers;
 
 use App\Core\Bootstrap;
 use App\Models\Oshi;
+use App\Models\Event;
 
 class OshiController
 {
     private $oshiModel;
+    private $eventModel;
 
     public function __construct()
     {
         $this->oshiModel = new Oshi();
+        $this->eventModel = new Event();
     }
 
     public function index()
@@ -40,8 +43,10 @@ class OshiController
         $id = $_GET['id'] ?? null;
         $oshi = $this->oshiModel->find($id);
 
+        $events = $this->eventModel->findByOshi($id);
+
         $twig = Bootstrap::getTwig();
-        echo $twig->render('oshi/show.html.twig', ['oshi' => $oshi]);
+        echo $twig->render('oshi/show.html.twig', ['oshi' => $oshi, 'events' => $events]);
     }
 
     public function edit()

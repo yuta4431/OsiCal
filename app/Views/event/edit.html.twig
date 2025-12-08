@@ -38,7 +38,7 @@
             <select name="category_id" id="category_select" required>
                 
                 {% for category in categories %}
-                    <option value="{{ category.id }}" {% if category_id == event.category_id %}selected{% endif %}>
+                    <option value="{{ category.id }}" {% if category.id == event.category_id %}selected{% endif %}>
                         {{ category.name }}
                     </option>
                 {% endfor %}
@@ -70,7 +70,7 @@
 
     </form>
 
-    <script src="/OshiCal/public/assets/js/event.js"></script>
+    <script src="/OshiCal/public/assets/js/common.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ oshi.name }}</title>
+</head>
+
+<body>
+    <h1>{{ oshi.name }}</h1>
+
+    <!-- 推しカード -->
+    <div class="oshi-card">
+        <a href="/OshiCal/public/index.php?route=oshi/edit&id={{ oshi.id }}">編集</a>
+        <a href="/OshiCal/public/index.php?route=oshi/destroy&id={{ oshi.id }}"
+           onclick="return confirm('本当に削除しますか？')">削除</a>
+    </div>
+
+    <!-- イベント一覧 -->
+    <h3>{{ oshi.name }} のイベント一覧</h3>
+
+    {% if events is empty %}
+        <p>登録されたイベントはありません。</p>
+    {% else %}
+        <div class="event-list">
+
+            {% for event in events %}
+                <div class="event-card">
+                    <h4>{{ event.title }}</h4>
+                    <p>日付：{{ event.date }}</p>
+                    <a href="/OshiCal/public/index.php?route=event/show&id={{ event.id }}">詳細</a>
+                </div>
+            {% endfor %}
+
+        </div>
+    {% endif %}
+
+    <p>
+        <a href="/OshiCal/public/index.php">トップに戻る</a>
+    </p>
+
+</body>
+</html>
