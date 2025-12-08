@@ -87,12 +87,24 @@ class EventController
         $memo = $_POST['memo'] ?? '';
         $oshi_id = $_POST['oshi_id'] ?? null;
         $category_id = $_POST['category_id'] ?? null;
-        
-        $id = $this->eventModel->update($id, $title, $date, $memo, $oshi_id, $category_id);
-        $event = $this->eventModel->find($id);
 
-        $twig = Bootstrap::getTwig();
-        echo $twig->render('event/show.html.twig', ['event' => $event]);
+        // Preserve navigation parameters
+        $from = $_POST['from_param'] ?? '';
+        $oshi_id_param = $_POST['oshi_id_param'] ?? '';
+
+        $id = $this->eventModel->update($id, $title, $date, $memo, $oshi_id, $category_id);
+
+        // Build redirect URL with preserved parameters
+        $redirect_url = '/OshiCal/public/index.php?route=event/show&id=' . $id;
+        if ($from) {
+            $redirect_url .= '&from=' . urlencode($from);
+            if ($oshi_id_param) {
+                $redirect_url .= '&oshi_id=' . urlencode($oshi_id_param);
+            }
+        }
+
+        header('Location: ' . $redirect_url);
+        exit;
     }
 
     public function destroy()

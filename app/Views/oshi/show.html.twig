@@ -10,9 +10,8 @@
 
     <!-- 推しカード -->
     <div class="oshi-card">
-        <a href="/OshiCal/public/index.php?route=oshi/edit&id={{ oshi.id }}">編集</a>
-        <a href="/OshiCal/public/index.php?route=oshi/destroy&id={{ oshi.id }}"
-           onclick="return confirm('本当に削除しますか？')">削除</a>
+        <button type="button" onclick="location.href='/OshiCal/public/index.php?route=oshi/edit&id={{ oshi.id }}'">編集</button>
+        <button type="button" onclick="if(confirm('本当に削除しますか？')) location.href='/OshiCal/public/index.php?route=oshi/destroy&id={{ oshi.id }}'">削除</button>
     </div>
 
     <!-- イベント一覧 -->
@@ -27,7 +26,7 @@
                 <div class="event-card">
                     <h4>{{ event.title }}</h4>
                     <p>日付：{{ event.date }}</p>
-                    <a href="/OshiCal/public/index.php?route=event/show&id={{ event.id }}">詳細</a>
+                    <a href="/OshiCal/public/index.php?route=event/show&id={{ event.id }}&from=oshi&oshi_id={{ oshi.id }}">イベント詳細</a>
                 </div>
             {% endfor %}
 
@@ -35,7 +34,7 @@
     {% endif %}
 
     <p>
-        <a href="/OshiCal/public/index.php">トップに戻る</a>
+        <button type="button" onclick="location.href='/OshiCal/public/index.php?route=oshi/index'">戻る</button>
     </p>
 
 </body>

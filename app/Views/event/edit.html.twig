@@ -9,8 +9,14 @@
 <body>
     <h1>イベント編集</h1>
 
+    {% set from = GET.from ?? '' %}
+    {% set oshi_id = GET.oshi_id ?? '' %}
+    {% set query_params = from ? '&from=' ~ from ~ (oshi_id ? '&oshi_id=' ~ oshi_id : '') : '' %}
+
     <form action="/OshiCal/public/index.php?route=event/update" method="post">
      <input type="hidden" name="id" value="{{ event.id }}">
+     <input type="hidden" name="from_param" value="{{ from }}">
+     <input type="hidden" name="oshi_id_param" value="{{ oshi_id }}">
         <div>
             <label for="oshi_select">推し：<label><br>
             <select name="oshi_id" id="oshi_select" required>
@@ -60,7 +66,8 @@
         </div>
 
         <div style="margin-top: 20px;">
-            <button type="submit" id="submit">更新する</button>
+            <button type="submit" id="submit">更新</button>
+            <button type="button" onclick="location.href='/OshiCal/public/index.php?route=event/show&id={{ event.id }}{{ query_params }}'" style="margin-left: 10px;">戻る</button>
         </div>
 
         <div id="category_buttons" style="display:none; margin-top:10px;">

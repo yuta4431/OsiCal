@@ -15,9 +15,8 @@
             <input type="text" name="name" value="{{ oshi.name }}">
         </p>
 
-        <button type="submit">更新する</button>
+        <button type="submit">更新</button>
+        <button type="button" onclick="location.href='/OshiCal/public/index.php?route=oshi/show&id={{ oshi.id }}'" style="margin-left: 10px;">戻る</button>
     </form>
-
-    <a href="/OshiCal/public/index.php?route=oshi/show&id={{ oshi.id }}">戻る</a>
 </body>
 </html>

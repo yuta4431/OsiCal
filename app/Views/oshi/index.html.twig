@@ -24,8 +24,8 @@
             
 
             <div class="card-buttons">
-                <a href="/OshiCal/public/index.php?route=oshi/edit&id={{ oshi.id }}">編集</a>
-                <a href="/OshiCal/public/index.php?route=oshi/destroy&id={{ oshi.id }}" onclick="return confirm('本当に削除しますか？');">削除</a>
+                <button type="button" onclick="location.href='/OshiCal/public/index.php?route=oshi/edit&id={{ oshi.id }}'">編集</button>
+                <button type="button" onclick="if(confirm('本当に削除しますか？')) location.href='/OshiCal/public/index.php?route=oshi/destroy&id={{ oshi.id }}'">削除</button>
             </div>
         </div>
     {% endfor %}
