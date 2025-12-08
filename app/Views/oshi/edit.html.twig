@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>推し編集</title>
+</head>
+<body>
+    <h1>編集</h1>
+
+    <form action="/OshiCal/public/index.php?route=oshi/update" method="post">
+        <input type="hidden" name="id" value="{{ oshi.id }}">
+
+        <p>
+            名前：<br>
+            <input type="text" name="name" value="{{ oshi.name }}">
+        </p>
+
+        <button type="submit">更新</button>
+        <button type="button" onclick="location.href='/OshiCal/public/index.php?route=oshi/show&id={{ oshi.id }}'" style="margin-left: 10px;">戻る</button>
+    </form>
+</body>
+</html>

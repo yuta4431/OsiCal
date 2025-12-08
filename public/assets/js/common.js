@@ -38,7 +38,52 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
-    initDynamicSelect('oshi_select', 'new_oshi_wrapper', 'new_oshi_name', 'addOshi');
+    // 推し一覧画面用：ボタンクリックでフォーム表示
+    const showOshiBtn = document.getElementById('show_new_oshi_btn');
+    const oshiWrapper = document.getElementById('new_oshi_wrapper');
+    if (showOshiBtn && oshiWrapper) {
+        showOshiBtn.addEventListener('click', function() {
+            showOshiBtn.style.display = 'none';
+            oshiWrapper.style.display = 'block';
+            oshiWrapper.querySelector('input').focus();
+        });
+
+        // 戻るボタン
+        window.hideNewOshiForm = function() {
+            oshiWrapper.style.display = 'none';
+            showOshiBtn.style.display = 'inline-block';
+            oshiWrapper.querySelector('input').value = '';
+        };
+
+        // 推しカード追加
+        window.addOshi = function(id, name) {
+            const container = document.querySelector('.oshi-container');
+            if (container) {
+                const card = document.createElement('div');
+                card.className = 'oshi-card';
+                card.innerHTML = `
+                    <h3>
+                        <a href="/OshiCal/public/index.php?route=oshi/show&id=${id}">
+                            ${name}
+                        </a>
+                    </h3>
+
+                    <div class="card-buttons">
+                        <a href="/OshiCal/public/index.php?route=oshi/edit&id=${id}">編集</a>
+                        <a href="/OshiCal/public/index.php?route=oshi/destroy&id=${id}" onclick="return confirm('本当に削除しますか？');">削除</a>
+                    </div>
+                `;
+                container.appendChild(card);
+                hideNewOshiForm();
+            }
+        };
+    }
+
+    // イベント登録画面用：セレクトボックスで推し追加
+    const oshiSelect = document.getElementById('oshi_select');
+    if (oshiSelect && oshiSelect.tagName === 'SELECT') {
+        initDynamicSelect('oshi_select', 'new_oshi_wrapper', 'new_oshi_name', 'addOshi');
+    }
 
     initDynamicSelect('category_select', 'new_category_wrapper', 'new_category_name', 'addCategory');
 

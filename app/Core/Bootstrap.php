@@ -12,6 +12,10 @@ class Bootstrap
             'cache' => false,
         ]);
 
+        // Add global request object for accessing GET/POST parameters
+        $twig->addGlobal('GET', $_GET);
+        $twig->addGlobal('POST', $_POST);
+
         return $twig;
     }
 }

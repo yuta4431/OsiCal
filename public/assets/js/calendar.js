@@ -4,7 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         displayEventTime: false,
-        events: calendarEvents
+        events: calendarEvents,
+        eventClick: function(info) {
+            // イベントクリック時にfrom=topパラメータを付けて遷移
+            window.location.href = info.event.url + '&from=top';
+            info.jsEvent.preventDefault();
+        }
     });
 
     calendar.render();

@@ -13,16 +13,21 @@
         <p>イベントが見つかりません。</p>
     {% endif %}
 
-    <p><a href="/OshiCal/public/index.php?route=event/edit&id={{ event.id }}">編集する</a></p>
-    <a href="/OshiCal/public/index.php?route=event/destroy&id={{ event.id }}"
-       onclick="return confirm('本当に削除しますか？');">
-        削除する
-    </a>
+    {% set from = GET.from ?? '' %}
+    {% set oshi_id = GET.oshi_id ?? '' %}
+    {% set query_params = from ? '&from=' ~ from ~ (oshi_id ? '&oshi_id=' ~ oshi_id : '') : '' %}
 
-
+    <div>
+        <button type="button" onclick="location.href='/OshiCal/public/index.php?route=event/edit&id={{ event.id }}{{ query_params }}'">編集</button>
+        <button type="button" onclick="if(confirm('本当に削除しますか？')) location.href='/OshiCal/public/index.php?route=event/destroy&id={{ event.id }}'" style="margin-left: 10px;">削除</button>
+    </div>
 
     <div style="margin-top: 20px;">
-        <a href="/OshiCal/public/index.php">カレンダーに戻る</a>
+        {% if from == 'oshi' and oshi_id %}
+            <button type="button" onclick="location.href='/OshiCal/public/index.php?route=oshi/show&id={{ oshi_id }}'">戻る</button>
+        {% else %}
+            <button type="button" onclick="location.href='/OshiCal/public/index.php'">戻る</button>
+        {% endif %}
     </div>
 
 </body>

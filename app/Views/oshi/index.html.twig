@@ -1,0 +1,34 @@
+<h1>推し一覧</h1>
+
+<div>
+    <button type="button" id="show_new_oshi_btn" class="btn-add">新規追加</button>
+</div>
+<div id="new_oshi_wrapper" style="display:none; margin-top: 8px;">
+    <input type="text" name="new_oshi_name" class="form-input" placeholder="追加したい推し名を入力">
+    <button type="button" onclick="submitOshi()">追加</button>
+    <button type="button" onclick="hideNewOshiForm()">戻る</button>
+</div>
+
+<div>
+    <a href="/OshiCal/public/index.php">トップページへ戻る</a>
+</div>
+
+<div class="oshi-container">
+    {% for oshi in oshis %}
+        <div class="oshi-card">
+             <h3>
+                <a href="/OshiCal/public/index.php?route=oshi/show&id={{ oshi.id }}">
+                    {{ oshi.name }}
+                </a>
+            </h3>
+            
+
+            <div class="card-buttons">
+                <button type="button" onclick="location.href='/OshiCal/public/index.php?route=oshi/edit&id={{ oshi.id }}'">編集</button>
+                <button type="button" onclick="if(confirm('本当に削除しますか？')) location.href='/OshiCal/public/index.php?route=oshi/destroy&id={{ oshi.id }}'">削除</button>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<script src="/OshiCal/public/assets/js/common.js"></script>
