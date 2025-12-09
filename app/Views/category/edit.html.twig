@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>カテゴリー編集</title>
+    <link rel="stylesheet" href="/OshiCal/public/assets/css/style.css">
+</head>
+<body>
+    <h1>カテゴリー編集</h1>
+
+    <form action="/OshiCal/public/index.php?route=category/update" method="post">
+        <input type="hidden" name="id" value="{{ category.id }}">
+
+        <div>
+            <label for="name_input">カテゴリー名：</label><br>
+            <input type="text" id="name_input" name="name" value="{{ category.name }}" required>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <label for="template_area">メモテンプレート：</label><br>
+            <textarea id="template_area" name="template" rows="10" cols="50">{{ template.template ?? '' }}</textarea>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button type="submit">更新</button>
+            <button type="button" onclick="location.href='/OshiCal/public/index.php?route=category/show&id={{ category.id }}'" style="margin-left: 10px;">戻る</button>
+        </div>
+    </form>
+</body>
+</html>
