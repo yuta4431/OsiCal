@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>カテゴリー一覧</title>
+    <link rel="stylesheet" href="/OshiCal/public/assets/css/style.css">
+</head>
+<body>
+    <h1>カテゴリー一覧</h1>
+
+    <button type="button" id="show_new_category_btn" class="btn-add">新規追加</button>
+    <div id="new_category_wrapper" style="display:none; margin-top: 8px;">
+        <div>
+            <label for="new_category_name">カテゴリー名：</label><br>
+            <input type="text" id="new_category_name" name="new_category_name" class="form-input" placeholder="追加したいカテゴリー名を入力">
+        </div>
+        <div style="margin-top: 10px;">
+            <label for="new_category_template">メモテンプレート：</label><br>
+            <textarea id="new_category_template" name="new_category_template" rows="5" cols="50" placeholder="イベント登録時のメモ欄に自動入力されるテンプレートを設定できます"></textarea>
+        </div>
+        <div style="margin-top: 10px;">
+            <button type="button" onclick="submitCategory()">追加</button>
+            <button type="button" onclick="hideNewCategoryForm()">戻る</button>
+        </div>
+    </div>
+
+    {% if categories is empty %}
+        <p>登録されたカテゴリーはありません。</p>
+    {% else %}
+        <div class="category-container">
+            {% for category in categories %}
+                <div class="category-card">
+                    <h3>{{ category.name }}</h3>
+                    <button type="button" onclick="location.href='/OshiCal/public/index.php?route=category/show&id={{ category.id }}'">詳細</button>
+                    <button type="button" onclick="location.href='/OshiCal/public/index.php?route=category/edit&id={{ category.id }}'">編集</button>
+                    <button type="button" onclick="if(confirm('本当に削除しますか？')) location.href='/OshiCal/public/index.php?route=category/destroy&id={{ category.id }}'">削除</button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <p>
+        <button type="button" onclick="location.href='/OshiCal/public/index.php'">戻る</button>
+    </p>
+
+    <script src="/OshiCal/public/assets/js/common.js"></script>
+    <script src="/OshiCal/public/assets/js/category.js"></script>
+</body>
+</html>
